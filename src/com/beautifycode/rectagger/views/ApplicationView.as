@@ -1,7 +1,6 @@
 package com.beautifycode.rectagger.views {
-	import com.beautifycode.rectagger.StaticLayoutView;
-
 	import flash.display.Sprite;
+
 
 	/**
 	 * @author Blase
