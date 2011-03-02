@@ -1,6 +1,5 @@
 package com.beautifycode.rectagger.views {
 	import com.beautifycode.rectagger.actors.ImagesModel;
-	import com.beautifycode.rectagger.events.FileRefEvent;
 	import com.beautifycode.rectagger.events.ThumbnailEvent;
 
 	import org.robotlegs.mvcs.Mediator;
@@ -24,10 +23,6 @@ package com.beautifycode.rectagger.views {
 			view.removeCurrentImage();
 			
 			view.addImage(imagesmodel.images[event.vo]);
-		}
-
-		private function onSingleImageLoaded(event:FileRefEvent):void {
-			view.addImage(event.vo);
 		}
 	}
 }

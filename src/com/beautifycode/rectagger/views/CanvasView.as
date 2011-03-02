@@ -3,6 +3,7 @@ package com.beautifycode.rectagger.views {
 
 	import flash.display.Graphics;
 	import flash.display.Sprite;
+	import flash.ui.Mouse;
 
 	/**
 	 * @author Marvin
@@ -19,7 +20,8 @@ package com.beautifycode.rectagger.views {
 		public function CanvasView() {
 		}
 
-		public function initialize(width : int, height : int) : void {
+		public function initialize(width : int, height : int) : void {	
+
 			_metaDataView = new MetaDataView();
 			_metaDataView.hide();
 
@@ -80,14 +82,14 @@ package com.beautifycode.rectagger.views {
 			}
 		}
 
-		public function showMetaDataInput(currentPage : int, cnt:int) : void {
-			_metaDataView.switchToInputMode(currentPage, "p"+currentPage+"c"+cnt, cnt);
+		public function showMetaDataInput(currentPage : int, cnt : int) : void {
+			_metaDataView.switchToInputMode(currentPage, "p" + currentPage + "c" + cnt, cnt);
 			_metaDataView.x = mouseX;
 			_metaDataView.y = mouseY;
 		}
 
-		public function editMetaDataInput(page : int, trigger : String, cnt:int=0) : void {
-			_metaDataView.switchToEditMode(page, trigger+"-edit", cnt);
+		public function editMetaDataInput(page : int, trigger : String, cnt : int = 0) : void {
+			_metaDataView.switchToEditMode(page, trigger, cnt);
 			_metaDataView.x = mouseX;
 			_metaDataView.y = mouseY;
 		}

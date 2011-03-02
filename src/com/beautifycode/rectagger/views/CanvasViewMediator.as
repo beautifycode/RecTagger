@@ -10,8 +10,11 @@ package com.beautifycode.rectagger.views {
 
 	import org.robotlegs.mvcs.Mediator;
 
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import flash.ui.Mouse;
 
 	/**
 	 * @author Marvin
@@ -43,7 +46,7 @@ package com.beautifycode.rectagger.views {
 			eventMap.mapListener(eventDispatcher, RecTagEvent.RECTAG_DELETED, deleteRecTag);
 		}
 
-		private function hideMeta(event:MetaDataEvent) : void {
+		private function hideMeta(event : MetaDataEvent) : void {
 			view.rectCanvasGraphics.clear();
 			_e = new NavigationEvent(NavigationEvent.SWITCH_TO_SCROLL, true, false);
 			dispatch(_e);
@@ -65,17 +68,10 @@ package com.beautifycode.rectagger.views {
 			view.editMetaDataInput(page, trigger, cnt);
 		}
 
-		private function clearLastRecTag() : void {
-			view.deleteRecTags();
-			view.rectCanvasGraphics.clear();
-			view.setRecTags(rectagsmodel.rects[_currentPage]);
-			view.bg.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-			view.bg.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-		}
 
 		private function refreshCanvas(event : MetaDataEvent) : void {
-			if(view.rectCanvasGraphics) view.rectCanvasGraphics.clear();
-			
+			if (view.rectCanvasGraphics) view.rectCanvasGraphics.clear();
+
 			_e = new NavigationEvent(NavigationEvent.SWITCH_TO_SCROLL, true, false);
 			dispatch(_e);
 			view.setRecTags(rectagsmodel.rects[_currentPage]);
@@ -84,7 +80,7 @@ package com.beautifycode.rectagger.views {
 		private function onImageChange(event : ThumbnailEvent) : void {
 			_currentPage = event.vo;
 			canvasmodel.currentPage = _currentPage;
-			if(rectagsmodel.rects[_currentPage]) rectagsmodel.currentRectCount = rectagsmodel.rects[_currentPage].length;
+			if (rectagsmodel.rects[_currentPage]) rectagsmodel.currentRectCount = rectagsmodel.rects[_currentPage].length;
 
 			view.clear();
 			view.initialize(imagesmodel.images[event.vo].width, imagesmodel.images[event.vo].height);
@@ -143,7 +139,7 @@ package com.beautifycode.rectagger.views {
 			_re.vo.page = _currentPage;
 			dispatch(_re);
 
-			view.showMetaDataInput(_currentPage, rectagsmodel.currentRectCount-1);
+			view.showMetaDataInput(_currentPage, rectagsmodel.currentRectCount - 1);
 		}
 	}
 }

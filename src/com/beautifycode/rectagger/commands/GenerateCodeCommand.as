@@ -5,6 +5,8 @@ package com.beautifycode.rectagger.commands {
 	import org.robotlegs.mvcs.Command;
 
 	import flash.net.FileReference;
+	import flash.ui.Mouse;
+	import flash.ui.MouseCursor;
 
 	/**
 	 * @author Blase
@@ -24,11 +26,13 @@ package com.beautifycode.rectagger.commands {
 			_codeStr = new String();
 			_totalCount = 0;
 			
+			
+			
 
 			for (var p:String in rectagsmodel.rects) {
 				for (var i : int = 0; i < rectagsmodel.rects[p].length; i++) {
-					var x : int = rectagsmodel.rects[p][i].posX * imagesmodel.resizeRatio;
-					var y : int = rectagsmodel.rects[p][i].posY * imagesmodel.resizeRatio;
+					var x : int = rectagsmodel.rects[p][i].posX * imagesmodel.resizeRatio + 1;
+					var y : int = rectagsmodel.rects[p][i].posY * imagesmodel.resizeRatio - 1;
 					var w : int = rectagsmodel.rects[p][i].w * imagesmodel.resizeRatio;
 					var h : int = rectagsmodel.rects[p][i].h * imagesmodel.resizeRatio;
 					var trigger : String = rectagsmodel.rects[p][i].trigger;
