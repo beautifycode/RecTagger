@@ -1,6 +1,6 @@
 package com.beautifycode.rectagger.views {
 	import com.beautifycode.rectagger.events.MetaDataEvent;
-	import com.beautifycode.rectagger.events.RecTagEvent;
+
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 
@@ -26,7 +26,7 @@ package com.beautifycode.rectagger.views {
 			_cnt = cnt;
 			_page = page;
 			
-			
+
 			_viewAsset.gotoAndStop(2);
 			_viewAsset.pageTF.text = page+"";
 			_viewAsset.triggerTF.text = trigger;
@@ -36,10 +36,34 @@ package com.beautifycode.rectagger.views {
 			
 			this.visible = true;
 		}
+		
+		public function switchToEditMode(page : int, trigger : String, cnt : int) : void {
+			_cnt = cnt;
+			_page = page;
+			
+
+			_viewAsset.gotoAndStop(2);
+			_viewAsset.pageTF.text = page+"";
+			_viewAsset.triggerTF.text = trigger;
+			
+			_viewAsset.saveBtn.addEventListener(MouseEvent.CLICK, onSaveClick);
+			_viewAsset.cancelBtn.removeEventListener(MouseEvent.CLICK, onCancelClick);
+			_viewAsset.cancelBtn.addEventListener(MouseEvent.CLICK, onCancelEditClick);
+			
+			this.visible = true;
+		}
+
+		private function onCancelEditClick(event : MouseEvent) : void {
+			this.visible = false;
+			
+			var _cancelEvent:MetaDataEvent = new MetaDataEvent(MetaDataEvent.CANCEL_EDIT, true, false);
+			dispatchEvent(_cancelEvent);
+		}
 
 		private function onCancelClick(event:MouseEvent):void {
 			this.visible = false;
-			var _cancelEvent:RecTagEvent = new RecTagEvent(RecTagEvent.DELETE_RECTAG, true, false);
+			
+			var _cancelEvent:MetaDataEvent = new MetaDataEvent(MetaDataEvent.CANCEL_CREATION, true, false);
 			_cancelEvent.vo = new Object();
 			_cancelEvent.vo.page = _page;
 			_cancelEvent.vo.cnt = _cnt;
@@ -60,5 +84,7 @@ package com.beautifycode.rectagger.views {
 		public function hide():void {
 			this.visible = false;
 		}
+
+		
 	}
 }

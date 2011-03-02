@@ -15,6 +15,7 @@ package com.beautifycode.rectagger.actors {
 		private var _bitmap:Bitmap;
 		private var _e:FileRefEvent;
 		private var _tmpThumbnail:Thumbnail;
+		
 
 		public function initialize():void {
 			_thumbnails = new Array();
@@ -29,7 +30,7 @@ package com.beautifycode.rectagger.actors {
 			_bitmap.x = 0;
 			_bitmap.y = 0;
 			
-			_tmpThumbnail = new Thumbnail(_bitmap, picName, picPath);
+			_tmpThumbnail = new Thumbnail(_bitmap, picName, picPath, _thumbnails.length);
 			_thumbnails.push(_tmpThumbnail);
 		}
 
@@ -41,6 +42,10 @@ package com.beautifycode.rectagger.actors {
 
 		public function get thumbnails():Array {
 			return _thumbnails;
+		}
+
+		public function createInfos(totalCount:String, cnt:int, rectagsCount:int, trigger:String) : void {
+			_thumbnails[totalCount].setInfos(cnt, trigger, rectagsCount);
 		}
 
 	}

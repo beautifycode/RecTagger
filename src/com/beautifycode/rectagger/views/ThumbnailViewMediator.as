@@ -84,7 +84,6 @@ package com.beautifycode.rectagger.views {
 			for (var i : int; i < event.vo.length; i++) {
 				var tmpThumbnail : Thumbnail = event.vo[i];
 				tmpThumbnail.y = _lY;
-				tmpThumbnail.id = i;
 				tmpThumbnail.doubleClickEnabled = true;
 				tmpThumbnail.addEventListener(MouseEvent.DOUBLE_CLICK, onThumbnailClick);
 

@@ -2,9 +2,9 @@ package com.beautifycode.rectagger.commands {
 	import com.adobe.serialization.json.JSON;
 	import com.beautifycode.rectagger.actors.FileRefService;
 	import com.beautifycode.rectagger.actors.RecTagsModel;
-
+	import com.beautifycode.rectagger.actors.ThumbnailsModel;
+	import com.beautifycode.rectagger.events.FileRefEvent;
 	import org.robotlegs.mvcs.Command;
-
 	import flash.events.Event;
 	import flash.net.FileFilter;
 	import flash.net.FileReference;
@@ -18,10 +18,13 @@ package com.beautifycode.rectagger.commands {
 		private var loadedFileBA:ByteArray;
 		private var loadedFileString:String;
 		private var loadedFileObject:Object;
+		
 		[Inject]
 		public var filerefservice:FileRefService;
 		[Inject]
 		public var rectagsmodel:RecTagsModel;
+		[Inject]
+		public var thumbnailsmodel:ThumbnailsModel;
 
 		override public function execute():void {
 			loadFileReference = new FileReference();
@@ -51,14 +54,7 @@ package com.beautifycode.rectagger.commands {
 		}
 
 		private function refreshComponents():void {
-			filerefservice.loadImagesFromConfig(loadedFileObject["imagepaths"]);
-
-			for (var p:String in loadedFileObject["rectags"]) {
-				for (var i:int = 0; i < loadedFileObject["rectags"][p].count; i++) {
-					rectagsmodel.createRecTag(loadedFileObject["rectags"][p][i].posX, loadedFileObject["rectags"][p][i].posY, loadedFileObject["rectags"][p][i].w, loadedFileObject["rectags"][p][i].h, loadedFileObject["rectags"][p][i].page);
-					rectagsmodel.editMetaData(loadedFileObject["rectags"][p][i].page, i, loadedFileObject["rectags"][p][i].trigger);
-				}
-			}
+			filerefservice.loadImagesFromConfig(loadedFileObject["imagepaths"], loadedFileObject);
 		}
 	}
 }

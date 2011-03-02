@@ -6,7 +6,9 @@ package com.beautifycode.rectagger.events {
 	 */
 	public class MetaDataEvent extends Event {
 		public static const SAVE_DATA:String = "SAVE_DATA";
-		public static const CANCEL_CREATION:String = "CANCEL_CREATION";
+		public static const CANCEL_CREATION : String = "CANCEL_CREATION";
+		public static const CANCEL_EDIT : String = "CANCEL_EDIT";
+		
 		public var vo:Object;
 		
 		public function MetaDataEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false) {

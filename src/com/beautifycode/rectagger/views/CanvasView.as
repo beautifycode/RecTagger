@@ -86,8 +86,8 @@ package com.beautifycode.rectagger.views {
 			_metaDataView.y = mouseY;
 		}
 
-		public function editwMetaDataInput(page : int, trigger : String, cnt:int=0) : void {
-			_metaDataView.switchToInputMode(page, trigger, cnt);
+		public function editMetaDataInput(page : int, trigger : String, cnt:int=0) : void {
+			_metaDataView.switchToEditMode(page, trigger+"-edit", cnt);
 			_metaDataView.x = mouseX;
 			_metaDataView.y = mouseY;
 		}

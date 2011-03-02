@@ -27,12 +27,12 @@ package com.beautifycode.rectagger.commands {
 
 			for (var p:String in rectagsmodel.rects) {
 				for (var i : int = 0; i < rectagsmodel.rects[p].length; i++) {
-					var x : Number = rectagsmodel.rects[p][i].posX * imagesmodel.resizeRatio;
-					var y : Number = rectagsmodel.rects[p][i].posY * imagesmodel.resizeRatio;
-					var w : Number = rectagsmodel.rects[p][i].w * imagesmodel.resizeRatio;
-					var h : Number = rectagsmodel.rects[p][i].h * imagesmodel.resizeRatio;
+					var x : int = rectagsmodel.rects[p][i].posX * imagesmodel.resizeRatio;
+					var y : int = rectagsmodel.rects[p][i].posY * imagesmodel.resizeRatio;
+					var w : int = rectagsmodel.rects[p][i].w * imagesmodel.resizeRatio;
+					var h : int = rectagsmodel.rects[p][i].h * imagesmodel.resizeRatio;
 					var trigger : String = rectagsmodel.rects[p][i].trigger;
-					_codeStr += 'linkContainer.attachMovie("linkMC", "link' + _totalCount + '",' + _totalCount + ',{_x:' + x + ',_y:' + y + ',_width:' + w + ',height:' + h + ',url:"' + trigger + '"});\n';
+					_codeStr += 'linkContainer.attachMovie("linkMC", "link' + _totalCount + '",' + _totalCount + ',{_x:' + x + ' ,_y:' + y + ' ,_width:' + w + ' ,_height:' + h + ' ,url:"' + trigger + '"});\n';
 					
 					_totalCount++;
 				}

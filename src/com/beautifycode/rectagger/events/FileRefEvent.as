@@ -7,7 +7,8 @@ package com.beautifycode.rectagger.events {
 	 */
 	public class FileRefEvent extends Event {
 		public static const SINGLE_IMAGE_LOADED:String = "SINGLE_IMAGE_LOADED";
-		public static const GENERATE_THUMBNAILS:String = "CREATE_THUMBNAILS";
+		public static const GENERATE_THUMBNAILS : String = "CREATE_THUMBNAILS";
+		public static const ALL_IMAGES_LOADED : String = "ALL_IMAGES_LOADED";
 		public var vo:*;
 		
 		public function FileRefEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false) {

@@ -98,7 +98,7 @@ package com.beautifycode.rectagger.components {
 
 		public function set trigger(trigger : String) : void {
 			_trigger = trigger;
-			_titleTF.content.text = _trigger;
+			if(_trigger) _titleTF.content.text = _trigger;
 		}
 
 		public function get cnt() : int {

@@ -37,8 +37,16 @@ package com.beautifycode.rectagger.views {
 			eventMap.mapListener(eventDispatcher, NavigationEvent.SWITCH_TO_DRAW, showCanvasBackground);
 			eventMap.mapListener(eventDispatcher, ThumbnailEvent.THUMBNAIL_CLICK, onImageChange, ThumbnailEvent);
 			eventMap.mapListener(eventDispatcher, MetaDataEvent.SAVE_DATA, refreshCanvas);
+			eventMap.mapListener(eventDispatcher, MetaDataEvent.CANCEL_CREATION, hideMeta);
+			eventMap.mapListener(eventDispatcher, MetaDataEvent.CANCEL_EDIT, hideMeta);
 			eventMap.mapListener(eventDispatcher, RecTagEvent.EDIT_RECTAG, editRecTag);
 			eventMap.mapListener(eventDispatcher, RecTagEvent.RECTAG_DELETED, deleteRecTag);
+		}
+
+		private function hideMeta(event:MetaDataEvent) : void {
+			view.rectCanvasGraphics.clear();
+			_e = new NavigationEvent(NavigationEvent.SWITCH_TO_SCROLL, true, false);
+			dispatch(_e);
 		}
 
 		private function deleteRecTag(event : RecTagEvent) : void {
@@ -54,7 +62,7 @@ package com.beautifycode.rectagger.views {
 			var cnt : int = event.vo.cnt;
 			var trigger : String = event.vo.trigger;
 
-			view.editwMetaDataInput(page, trigger, cnt);
+			view.editMetaDataInput(page, trigger, cnt);
 		}
 
 		private function clearLastRecTag() : void {
@@ -66,7 +74,8 @@ package com.beautifycode.rectagger.views {
 		}
 
 		private function refreshCanvas(event : MetaDataEvent) : void {
-			view.rectCanvasGraphics.clear();
+			if(view.rectCanvasGraphics) view.rectCanvasGraphics.clear();
+			
 			_e = new NavigationEvent(NavigationEvent.SWITCH_TO_SCROLL, true, false);
 			dispatch(_e);
 			view.setRecTags(rectagsmodel.rects[_currentPage]);

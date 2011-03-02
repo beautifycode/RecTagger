@@ -1,5 +1,5 @@
 package com.beautifycode.rectagger {
-	import com.beautifycode.rectagger.commands.GenerateCodeCommand;
+	import com.beautifycode.rectagger.commands.DeleteLastRectCommand;
 	import com.beautifycode.rectagger.actors.CanvasModel;
 	import com.beautifycode.rectagger.actors.FileRefService;
 	import com.beautifycode.rectagger.actors.ImagesModel;
@@ -8,12 +8,17 @@ package com.beautifycode.rectagger {
 	import com.beautifycode.rectagger.commands.BrowseFilesCommand;
 	import com.beautifycode.rectagger.commands.CreateNewRecTagCommand;
 	import com.beautifycode.rectagger.commands.DeleteRecTagCommand;
+	import com.beautifycode.rectagger.commands.GenerateCodeCommand;
 	import com.beautifycode.rectagger.commands.InitializeCommand;
 	import com.beautifycode.rectagger.commands.LoadConfigCommand;
+	import com.beautifycode.rectagger.commands.RefreshDataFromConfigCommand;
 	import com.beautifycode.rectagger.commands.SaveConfigCommand;
 	import com.beautifycode.rectagger.commands.SaveMetaDataCommand;
 	import com.beautifycode.rectagger.components.RecTag;
 	import com.beautifycode.rectagger.components.RecTagMediator;
+	import com.beautifycode.rectagger.components.Thumbnail;
+	import com.beautifycode.rectagger.components.ThumbnailMediator;
+	import com.beautifycode.rectagger.events.FileRefEvent;
 	import com.beautifycode.rectagger.events.MetaDataEvent;
 	import com.beautifycode.rectagger.events.NavigationEvent;
 	import com.beautifycode.rectagger.events.RecTagEvent;
@@ -32,11 +37,10 @@ package com.beautifycode.rectagger {
 	import com.beautifycode.rectagger.views.WorkspaceView;
 	import com.beautifycode.rectagger.views.WorkspaceViewMediator;
 
-	import flash.display.DisplayObjectContainer;
-
 	import org.robotlegs.base.ContextEvent;
 	import org.robotlegs.mvcs.Context;
 
+	import flash.display.DisplayObjectContainer;
 
 
 	/**
@@ -58,15 +62,23 @@ package com.beautifycode.rectagger {
 			injector.mapSingleton(CanvasModel);
 
 			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, InitializeCommand, ContextEvent, true);
+			
 			commandMap.mapEvent(NavigationEvent.BROWSE_FILES, BrowseFilesCommand, NavigationEvent);
+			commandMap.mapEvent(NavigationEvent.GENERATE_CODE, GenerateCodeCommand, NavigationEvent);
+			
 			commandMap.mapEvent(RecTagEvent.CREATE_RECTAG, CreateNewRecTagCommand, RecTagEvent);
 			commandMap.mapEvent(RecTagEvent.DELETE_RECTAG, DeleteRecTagCommand, RecTagEvent);
+			
+			commandMap.mapEvent(MetaDataEvent.CANCEL_CREATION, DeleteLastRectCommand, MetaDataEvent);
 			commandMap.mapEvent(MetaDataEvent.SAVE_DATA, SaveMetaDataCommand, MetaDataEvent);
+			
 			commandMap.mapEvent(NavigationEvent.SAVE_CONFIG, SaveConfigCommand, NavigationEvent);
 			commandMap.mapEvent(NavigationEvent.LOAD_CONFIG, LoadConfigCommand, NavigationEvent);
-			commandMap.mapEvent(NavigationEvent.GENERATE_CODE, GenerateCodeCommand, NavigationEvent);
+			
+			commandMap.mapEvent(FileRefEvent.ALL_IMAGES_LOADED, RefreshDataFromConfigCommand, FileRefEvent);
 
 			mediatorMap.mapView(NavigationView, NavigationViewMediator);
+			mediatorMap.mapView(Thumbnail, ThumbnailMediator);
 			mediatorMap.mapView(ImageView, ImageViewMediator);
 			mediatorMap.mapView(CanvasView, CanvasViewMediator);
 			mediatorMap.mapView(WorkspaceView, WorkspaceViewMediator);
