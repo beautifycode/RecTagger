@@ -17,10 +17,8 @@ package com.beautifycode.rectagger.actors {
 	public class FileRefService extends Actor {
 		[Inject]
 		public var imagesmodel:ImagesModel;
-		
 		[Inject]
 		public var thumbnailsmodel:ThumbnailsModel;
-		
 		private var _fileRef:FileReference;
 		private var _fileFilter:FileFilter;
 		private var _loader:Loader;
@@ -31,8 +29,9 @@ package com.beautifycode.rectagger.actors {
 		private var _filesCount:uint;
 		private var _tmpFile:*;
 		private var _currentFilesLoaded:int;
-		private var _selectedFiles : Array;
-		private var _imgName : *;
+		private var _selectedFiles:Array;
+		private var _imgName:*;
+		private var _imgPath:*;
 
 		public function FileRefService() {
 			_fileFilter = new FileFilter("Image", "*.jpg;*.gif;*.png;");
@@ -65,7 +64,7 @@ package com.beautifycode.rectagger.actors {
 		public function browseMultipleFiles():void {
 			imagesmodel.initialize();
 			thumbnailsmodel.initialize();
-			
+
 			_file = new File();
 			_file.addEventListener(FileListEvent.SELECT_MULTIPLE, onMultipleSelect);
 			_file.browseForOpenMultiple("Please select a file or three...");
@@ -75,15 +74,15 @@ package com.beautifycode.rectagger.actors {
 			_filesCount = event.files.length;
 			_selectedFiles = event.files;
 			_currentFilesLoaded = 0;
-						
-			loadImage(_currentFilesLoaded);			
+
+			loadImage(_currentFilesLoaded);
 		}
 
 		private function loadImage(c:int):void {
 			_imgReq = new URLRequest(_selectedFiles[c].url);
 			_imgName = _selectedFiles[c].name;
-			
-			
+			_imgPath = _selectedFiles[c].url;
+
 			_imgLoader = new Loader();
 			_imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onImageLoaded);
 			_imgLoader.load(_imgReq);
@@ -91,15 +90,46 @@ package com.beautifycode.rectagger.actors {
 
 		private function onImageLoaded(event:Event):void {
 			imagesmodel.storeImage(event.target.content.bitmapData);
-			thumbnailsmodel.createThumbnail(event.target.content.bitmapData, _imgName);
+			thumbnailsmodel.createThumbnail(event.target.content.bitmapData, _imgName, _imgPath);
 			_currentFilesLoaded++;
-			
-			if(_currentFilesLoaded < _filesCount) loadImage(_currentFilesLoaded);
+
+			if (_currentFilesLoaded < _filesCount) loadImage(_currentFilesLoaded);
 			else onAllImagesLoaded();
 		}
 
 		private function onAllImagesLoaded():void {
 			thumbnailsmodel.generateThumbnails();
+		}
+
+		public function saveFile(data:String):void {
+		}
+
+		public function loadImagesFromConfig(imagesToLoad:Array):void {
+			imagesmodel.initialize();
+			thumbnailsmodel.initialize();
+
+			_selectedFiles = imagesToLoad;
+			_filesCount = imagesToLoad.length;
+			loadImageFromPath(_currentFilesLoaded);
+		}
+
+		private function loadImageFromPath(c:int):void {
+			_imgReq = new URLRequest(_selectedFiles[c]);
+			_imgName = _selectedFiles[c];
+			_imgPath = _selectedFiles[c];
+
+			_imgLoader = new Loader();
+			_imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onImageLoadedFromPath);
+			_imgLoader.load(_imgReq);
+		}
+
+		private function onImageLoadedFromPath(event:Event):void {
+			imagesmodel.storeImage(event.target.content.bitmapData);
+			thumbnailsmodel.createThumbnail(event.target.content.bitmapData, _imgName, _imgPath);
+			_currentFilesLoaded++;
+
+			if (_currentFilesLoaded < _filesCount) loadImageFromPath(_currentFilesLoaded);
+			else onAllImagesLoaded();
 		}
 	}
 }

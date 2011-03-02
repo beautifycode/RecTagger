@@ -10,28 +10,30 @@ package com.beautifycode.rectagger.actors {
 	 * @author Marvin
 	 */
 	public class ImagesModel extends Actor {
-		private static const _MAX_WIDTH:Number = 500;
-		private static const _MAX_HEIGHT:Number = 600;
-		private var _bitmap:Bitmap;
-		private var _e:FileRefEvent;
-		private var _images:Array;
+		private static const _MAX_WIDTH : Number = 500;
+		private static const _MAX_HEIGHT : Number = 600;
+		private var _bitmap : Bitmap;
+		private var _e : FileRefEvent;
+		private var _images : Array;
+		private var _bmOldWidth : Number;
+		private var _resizeRatio : Number;
 
 		public function ImagesModel() {
 			super();
 		}
 
-		public function initialize():void {
+		public function initialize() : void {
 			_images = new Array();
 		}
 
-		public function storeImage(bmData:BitmapData):void {
-			trace("image stored!");
-			
+		public function storeImage(bmData : BitmapData) : void {
 			_bitmap = new Bitmap();
 			_bitmap.bitmapData = bmData;
 			_bitmap.smoothing = true;
 			_bitmap.x = 0;
 			_bitmap.y = 0;
+
+			_bmOldWidth = _bitmap.width;
 
 			if ( _bitmap.width > _MAX_WIDTH || _bitmap.height < _MAX_HEIGHT ) {
 				// resizeBitmap(_bitmap);
@@ -39,16 +41,13 @@ package com.beautifycode.rectagger.actors {
 				_bitmap.scaleY = _bitmap.scaleX;
 			}
 			
-			_images.push(_bitmap);
-			trace('_bitmap: ' + (_bitmap.width));
-			trace('_images: ' + (_images.length));
+			_resizeRatio = _bmOldWidth / _bitmap.width;
+			trace('_resizeRatio: ' + (_resizeRatio));
 
-//			_e = new FileRefEvent(FileRefEvent.SINGLE_IMAGE_LOADED, true, false);
-//			_e.vo = _bitmap;
-//			dispatch(_e);
+			_images.push(_bitmap);
 		}
-		
-		private function resizeBitmap(target:Bitmap):void {
+
+		private function resizeBitmap(target : Bitmap) : void {
 			if ( target.height < target.width ) {
 				target.width = _MAX_WIDTH;
 				target.scaleY = target.scaleX;
@@ -58,8 +57,12 @@ package com.beautifycode.rectagger.actors {
 			}
 		}
 
-		public function get images():Array {
+		public function get images() : Array {
 			return _images;
+		}
+
+		public function get resizeRatio() : Number {
+			return _resizeRatio;
 		}
 	}
 }

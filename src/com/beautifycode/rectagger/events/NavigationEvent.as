@@ -8,7 +8,10 @@ package com.beautifycode.rectagger.events {
 		public static const BROWSE_FILES:String = "BROWSE_FILES";
 		public static const SWITCH_TO_SCROLL:String = "SWITCH_TO_SCROLL";
 		public static const SWITCH_TO_DRAW:String = "SWITCH_TO_DRAW";
-		public static const SAVE_COORDS:String = "SAVE_COORDS";
+		public static const SAVE_CONFIG:String = "SAVE_CONFIG";
+		public static const LOAD_CONFIG : String = "LOAD_CONFIG";
+		public static const GENERATE_CODE : String = "GENERATE_CODE";
+		
 		public var vo:Object;
 
 		public function NavigationEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false) {

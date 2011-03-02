@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><application xmlns="http://ns.adobe.com/air/application/2.5" minimumPatchLevel="0">
+<!-- AIR Application Descriptor File. See http://www.adobe.com/go/learn_air_1.0_application_descriptor_en. -->
+	<id>RecTagger</id>
+	<name>RecTagger</name>
+        <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade. 
+             Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
+             An updated version of application must have a versionNumber value higher than the previous version. Required for namespace >= 2.5 . -->
+        <versionNumber>1.0.0</versionNumber>
+
+        <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
+        <versionLabel>v1</versionLabel>
+	<filename>RecTagger</filename>
+	<description>
+		<text xml:lang="en">Create coordinates with scale factor.</text>
+	</description>
+	<copyright>Copyright 2011, Marvin Blase</copyright>
+	<initialWindow>
+		<content>RecTagger.swf</content>
+		<title>RecTagger</title>
+		<systemChrome>standard</systemChrome>
+		<transparent>false</transparent>
+		<visible>true</visible>
+		<minimizable>true</minimizable>
+		<maximizable>true</maximizable>
+		<resizable>true</resizable>
+		<width>1280</width>
+		<height>600</height>
+		<x>0</x>
+		<y>0</y>
+		<minSize>1280 600</minSize>
+	</initialWindow>
+	<installFolder>Beautify Code/RecTagger</installFolder>
+	<programMenuFolder>Beautify Code Utils/RecTagger</programMenuFolder>
+	
+	<customUpdateUI>false</customUpdateUI>
+	<allowBrowserInvocation>false</allowBrowserInvocation>
+	<fileTypes>
+		<fileType>
+			<name>com.example</name>
+			<extension>xmpl</extension>
+			<description>Example file</description>
+			<contentType>example/x-data-type</contentType>
+			
+		</fileType>
+	</fileTypes>
+</application>

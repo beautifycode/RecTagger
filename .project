@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>recTagger</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.powerflasher.fdt.core.FlashBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.powerflasher.fdt.core.FlashNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>RobotLegs</name>
+			<type>2</type>
+			<locationURI>RobotLegs</locationURI>
+		</link>
+		<link>
+			<name>SwiftSuspenders.swc</name>
+			<type>1</type>
+			<locationURI>SwiftSuspenders</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

@@ -13,7 +13,7 @@ package com.beautifycode.rectagger.views {
 		public var view:ImageView;
 
 		[Inject]
-		public var model:ImagesModel;
+		public var imagesmodel:ImagesModel;
 
 
 		override public function onRegister():void {
@@ -22,7 +22,8 @@ package com.beautifycode.rectagger.views {
 
 		private function onImageChange(event:ThumbnailEvent):void {
 			view.removeCurrentImage();
-			view.addImage(model.images[event.vo]);
+			
+			view.addImage(imagesmodel.images[event.vo]);
 		}
 
 		private function onSingleImageLoaded(event:FileRefEvent):void {

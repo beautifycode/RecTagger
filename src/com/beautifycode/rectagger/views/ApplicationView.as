@@ -33,7 +33,7 @@ package com.beautifycode.rectagger.views {
 			workspaceView.addChild(canvasView);
 
 			staticLayoutView = new StaticLayoutView();
-			staticLayoutView.y = 10;
+			staticLayoutView.y = 0;
 
 			navigationView = new NavigationView();
 			navigationView.x = 0;

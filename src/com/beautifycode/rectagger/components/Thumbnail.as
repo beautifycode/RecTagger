@@ -13,11 +13,13 @@ package com.beautifycode.rectagger.components {
 		private var _border:Sprite;
 		private var _name : String;
 		private var _tf : TextField;
-		private var _format : TextFormat;
+		private var _format:TextFormat;
+		private var _path:String;
 		
-		public function Thumbnail(bm:Bitmap, picName:String) {
+		public function Thumbnail(bm:Bitmap, picName:String, picPath:String) {
 			_bm = bm;
 			_name = picName;
+			_path = picPath;
 			
 			_border = new Sprite();
 			_border.graphics.beginFill(0xFFFFFF);
@@ -36,6 +38,10 @@ package com.beautifycode.rectagger.components {
 //			addChild(_border);
 			addChild(_bm);	
 			addChild(_tf);
+		}
+
+		public function get path():String {
+			return _path;
 		}
 	}
 }

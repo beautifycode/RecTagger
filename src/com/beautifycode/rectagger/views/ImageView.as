@@ -1,4 +1,6 @@
 package com.beautifycode.rectagger.views {
+	import com.beautifycode.rectagger.components.RecTag;
+
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 

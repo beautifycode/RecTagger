@@ -46,7 +46,6 @@ package com.beautifycode.rectagger.views {
 		}
 
 		private function onMouseDown(event : MouseEvent) : void {
-			trace(view.y);
 			if (_draggable) {
 				_dragging = true;
 				_prevY = view.y;
@@ -96,7 +95,6 @@ package com.beautifycode.rectagger.views {
 
 		private function onThumbnailClick(event : MouseEvent) : void {
 			_e = new ThumbnailEvent(ThumbnailEvent.THUMBNAIL_CLICK, true, false);
-			trace('event.target: ' + (event.target));
 			_e.vo = event.target.id;
 			dispatch(_e);
 		}
