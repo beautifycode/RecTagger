@@ -81,6 +81,7 @@ package com.beautifycode.rectagger.actors {
 
 		private function loadImage(c : int) : void {
 			_imgReq = new URLRequest(_selectedFiles[c].url);
+			trace('_selectedFiles[c].url: ' + (_selectedFiles[c].url));
 			_imgName = _selectedFiles[c].name;
 			_imgPath = _selectedFiles[c].url;
 
@@ -119,6 +120,7 @@ package com.beautifycode.rectagger.actors {
 
 		private function loadImageFromPath(c : int) : void {
 			_imgReq = new URLRequest(_selectedFiles[c]);
+			trace('_selectedFiles[c]: ' + (_selectedFiles[c]));
 			_imgName = _selectedFiles[c];
 			_imgPath = _selectedFiles[c];
 

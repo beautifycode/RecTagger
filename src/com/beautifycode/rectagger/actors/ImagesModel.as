@@ -42,7 +42,6 @@ package com.beautifycode.rectagger.actors {
 			}
 			
 			_resizeRatio = _bmOldWidth / _bitmap.width;
-			trace('_resizeRatio: ' + (_resizeRatio));
 
 			_images.push(_bitmap);
 		}
